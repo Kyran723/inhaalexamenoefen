@@ -1,0 +1,77 @@
+<%- include('partials/header', { title: 'Nieuw Recept - Ons Kookboek' }) %>
+<%- include('partials/navbar') %>
+
+<div class="container">
+  <h2>Nieuw Recept Toevoegen</h2>
+
+  <form action="/add-recipe" method="POST" class="form-recipe">
+    <!-- Naam -->
+    <div class="form-group">
+      <label for="name">Naam Recept</label>
+      <input type="text" id="name" name="name" placeholder="Naam van het recept" required />
+    </div>
+
+    <!-- Ingrediënten (1 per lijn) -->
+    <div class="form-group">
+      <label for="ingredients">Ingrediënten (één per regel)</label>
+      <textarea 
+        id="ingredients" 
+        name="ingredients" 
+        rows="4" 
+        placeholder="Bijv. '500g bloem' op de eerste regel, '2 eieren' op de volgende, enz."
+      ></textarea>
+    </div>
+
+    <!-- Bereiding -->
+    <div class="form-group">
+      <label for="preparation">Bereiding (stappen)</label>
+      <textarea 
+        id="preparation" 
+        name="preparation" 
+        rows="6" 
+        placeholder="Stap voor stap uitleg..."
+      ></textarea>
+    </div>
+
+    <!-- Categorie (dropdown) -->
+    <div class="form-group">
+      <label for="category">Categorie</label>
+      <select id="category" name="category" required>
+        <option value="">-- Kies een categorie --</option>
+        <% for (let category of recipeCategories) { %>
+          <option value="<%= category %>"><%= category %></option>
+        <% } %>
+      </select>
+    </div>
+
+    <!-- Tijd -->
+    <div class="form-group">
+      <label for="time">Tijd (in minuten)</label>
+      <input type="number" id="time" name="time" placeholder="Bijv. 30" min="1" />
+    </div>
+
+    <!-- Moeilijkheid -->
+    <div class="form-group">
+      <label for="difficulty">Moeilijkheid (1 = makkelijk, 5 = moeilijk)</label>
+      <input 
+        type="number" 
+        id="difficulty" 
+        name="difficulty" 
+        placeholder="1 t/m 5" 
+        min="1" 
+        max="5" 
+        required 
+      />
+    </div>
+
+    <!-- Afbeelding (optioneel) -->
+    <div class="form-group">
+      <label for="image">Afbeelding (URL)</label>
+      <input type="url" id="image" name="image" placeholder="https://voorbeeld.com/afbeelding.jpg" />
+    </div>
+
+    <button type="submit" class="btn">Opslaan</button>
+  </form>
+</div>
+
+<%- include('partials/footer') %>

@@ -1,0 +1,18 @@
+<nav class="navbar">
+    <div class="nav-left">
+      <a class="brand" href="/recipes">Ons Kookboek</a>
+    </div>
+    <div class="nav-right">
+      <% if (user) { %>
+        <div class="user-menu">
+          <span class="user-avatar"><%= user.email.toUpperCase() %></span>
+          <div class="user-dropdown">
+            <a href="/logout">Logout</a>
+          </div>
+        </div>
+      <% } else { %>
+        <a href="/login">Login</a>
+      <% } %>
+    </div>
+  </nav>
+  

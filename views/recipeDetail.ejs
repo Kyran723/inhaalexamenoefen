@@ -1,0 +1,47 @@
+<%- include('partials/header', { title: recipe.name + ' - Ons Kookboek' }) %>
+<%- include('partials/navbar') %>
+
+<div class="container recipe-detail-container">
+  <div class="recipe-header">
+    <h2><%= recipe.name %></h2>
+    <% if (recipe.author) { %>
+      <p>Door: <%= recipe.author.fullname %> (<%= recipe.author.username %>)</p>
+    <% } %>
+  </div>
+
+  <div class="recipe-body">
+    <div class="recipe-image">
+      <img 
+        src="<%= recipe.image ? recipe.image : '/kookpot-icon.png' %>" 
+        alt="<%= recipe.name %>"
+      />
+    </div>
+
+    <div class="recipe-info">
+      <p><strong>Categorie:</strong> <%= recipe.category %></p>
+      <p><strong>Tijd:</strong> <%= recipe.time %> min</p>
+      <p><strong>Moeilijkheid:</strong> <%= recipe.difficulty %></p>
+      <p>
+        <strong>Gemiddelde rating:</strong> 
+        <%= recipe.averageRating ? recipe.averageRating.toFixed(1) : 'Nog geen rating' %>
+      </p>
+
+      <h3>Ingrediënten</h3>
+      <% if (recipe.ingredients && recipe.ingredients.length) { %>
+        <ul>
+          <% recipe.ingredients.forEach(function(ing) { %>
+            <li><%= ing %></li>
+          <% }) %>
+        </ul>
+      <% } else { %>
+        <p>Geen ingrediënten beschikbaar.</p>
+      <% } %>
+
+      <h3>Bereiding</h3>
+      <p><%= recipe.preparation %></p>
+    </div>
+  </div>
+
+</div>
+
+<%- include('partials/footer') %>

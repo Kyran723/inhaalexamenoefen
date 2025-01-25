@@ -1,0 +1,55 @@
+<%- include('partials/header', { title: 'Alle Recepten - Ons Kookboek' }) %>
+<%- include('partials/navbar') %>
+
+<div class="container">
+  <h2>Alle Recepten</h2>
+
+   <!-- <div class="recipe-navigation"> -->
+      <!-- Zoekbalk (GET naar /recipes, of /, afhankelijk van je routering) -->
+      <form method="get" action="/recipes" class="search-form">
+        <div class="form-group">
+          <label for="search">Zoek recept</label>
+          <input 
+            type="text" 
+            id="search" 
+            name="q"
+            placeholder="Pasta" 
+            value="<%= typeof searchQuery !== 'undefined' ? searchQuery : '' %>"
+          />
+          <button type="submit" class="btn">Zoek</button>
+        </div>
+      </form>
+   <!-- </div> -->
+
+  <!-- Receptenlijst -->
+  <div class="recipe-list">
+    <% if (recipes && recipes.length) { %>
+      <% recipes.forEach(function(recipe) { %>
+        <div class="recipe-item">
+          <img 
+            src="<%= recipe.image ? recipe.image : '/kookpot-icon.png' %>" 
+            alt="<%= recipe.name %>" 
+            class="recipe-thumb"
+          />
+          <div>
+            <h3>
+              <a href="/recipes/<%= recipe._id %>"><%= recipe.name %></a>
+            </h3>
+            <p>Categorie: <%= recipe.category %></p>
+            <p>Tijd: <%= recipe.time %> min</p>
+            <p>Moeilijkheid: <%= recipe.difficulty %></p>
+          </div>
+        </div>
+      <% }) %>
+    <% } else { %>
+      <p>Geen recepten gevonden.</p>
+    <% } %>
+  </div>
+
+  <!-- Knop om een recept toe te voegen (naar /add-recipe) -->
+  <div class="add-recipe-button">
+    <a href="/add-recipe" class="btn">Nieuw Recept Toevoegen</a>
+  </div>
+</div>
+
+<%- include('partials/footer') %>
